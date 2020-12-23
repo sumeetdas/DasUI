@@ -1,0 +1,136 @@
+nav {
+    background: #222;
+    /* first val top = bottom (omitted) = 0px, second val = right = left (omitted) = 15px */
+    padding: 0 15px;
+    font-family: sans-serif;
+    font-size: 16px;
+    /*
+    The box-sizing property sets how the total width and height of an element is calculated. The following values are allowed:
+
+    *content-box* gives you the *default* CSS box-sizing behavior. 
+    If you set an element's width to 100 pixels, then the element's content box will be 100 pixels wide, 
+    and the width of any border or padding will be added to the final rendered width, making the element wider than 100px.
+
+    *border-box* tells the browser to account for any border and padding in the values you specify for an element's width and height. 
+    If you set an element's width to 100 pixels, that 100 pixels will include any border or padding you added, 
+    and the content box will shrink to absorb that extra width. This typically makes it much easier to size elements.
+    */
+    box-sizing: border-box;
+    margin: 0;
+
+    /* flex properties */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 15px 5px;
+}
+
+nav-header {
+  font-size: 20px;
+  /*top, right, left, bottom*/
+  padding: 7.5px 10px 7.5px 0;
+  width: 135px;
+}
+
+nav-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* fix for changing widths when toggling nav-items in collapsed mode.
+    Width change due to larger content size in menu items. Should set it large enough to accomodate the longest menu item text */
+    width: 100px;
+}
+
+/* Ensure that children nodes inherit width from parent */
+nav-menu-header {
+  width: inherit;
+}
+
+nav-menu-items {
+  width: inherit;
+}
+
+/* display down arrow next to menu */
+nav-menu-header a:after {
+  font-size: 14px;
+  font-weight: 900;
+  content: "▾";
+  color: white;
+  margin: 0 5px;
+}
+
+/* toggle menu items */
+nav-menu-items.hide {
+  display: none;
+}
+
+nav-item a:hover, a:hover::after,
+nav-menu-item a:hover, a:hover::after,
+nav-header a:hover, a:hover::after,
+nav-menu-header a:hover, a:hover::after {
+    color: #ccc;
+}
+
+nav-toggle {
+  font-size: 20px;
+}
+
+/* mobile style */
+nav-toggle {
+  order: 1;
+  justify-content: flex-end;
+}
+
+/* hide nav-items in mobiles */
+nav-items {
+  display: none;
+}
+
+nav-items.show {
+  display: flex;
+  order: 2;
+  /* sets the size of the flex content box.
+  Setting it as 100% pushes nav-items content below navbar */
+  flex-basis: 100%;
+}
+
+/* design for larger screens */
+@media all and (min-width: 500px) {
+  /* always display nav items in larger screens */
+  nav-items {
+    flex: 6;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  nav-menu-items {
+    display: flex;
+    flex-direction: column;
+    /* style to position menu below nav bar */
+    position: absolute;
+    top: 75px;
+    background-color: #222;
+  }
+
+  nav-toggle {
+    display: none;
+  }
+}
